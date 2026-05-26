@@ -1,3 +1,4 @@
+import { LanguageProvider } from "@/components/LanguageProvider";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
@@ -16,22 +17,24 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden">
-      <Navbar />
-      <Hero />
-      <TrustBar />
-      <Services />
-      <Routes />
-      <Fleet />
-      <HowItWorks />
-      <WhyUs />
-      <Destinations />
-      <Testimonials />
-      <FAQ />
-      <BookingCTA />
-      <Contact />
-      <Footer />
-      <WhatsAppFloat />
-    </main>
+    <LanguageProvider>
+      <main className="overflow-x-hidden">
+        <Navbar />
+        <Hero />
+        <TrustBar />
+        <Services />
+        <Routes />
+        <Fleet />
+        <HowItWorks />
+        <WhyUs />
+        <Destinations />
+        <Testimonials />
+        <FAQ />
+        <BookingCTA />
+        <Contact />
+        <Footer />
+        <WhatsAppFloat />
+      </main>
+    </LanguageProvider>
   );
 }

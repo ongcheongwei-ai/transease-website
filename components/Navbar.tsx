@@ -2,17 +2,11 @@
 import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { CONTACT } from "@/lib/contact";
-
-const links = [
-  { href: "#services", label: "Services" },
-  { href: "#routes", label: "Routes & Pricing" },
-  { href: "#fleet", label: "Fleet" },
-  { href: "#destinations", label: "Destinations" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
-];
+import { useLang } from "./LanguageProvider";
+import LanguageToggle from "./LanguageToggle";
 
 export default function Navbar() {
+  const { t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -22,6 +16,15 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const links = [
+    { href: "#services", label: t.nav.services },
+    { href: "#routes", label: t.nav.routes },
+    { href: "#fleet", label: t.nav.fleet },
+    { href: "#destinations", label: t.nav.destinations },
+    { href: "#faq", label: t.nav.faq },
+    { href: "#contact", label: t.nav.contact },
+  ];
 
   return (
     <header
@@ -54,6 +57,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <LanguageToggle />
           <a
             href={`tel:${CONTACT.phoneMYRaw}`}
             className="inline-flex items-center gap-2 text-sm font-semibold text-ink-900"
@@ -61,17 +65,20 @@ export default function Navbar() {
             <Phone size={16} className="text-brand-600" /> {CONTACT.phoneMY}
           </a>
           <a href={CONTACT.whatsappLink} className="btn-primary" target="_blank" rel="noreferrer">
-            Book Now
+            {t.nav.book}
           </a>
         </div>
 
-        <button
-          onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink-200 lg:hidden"
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <LanguageToggle variant="compact" />
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink-200"
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -93,7 +100,7 @@ export default function Navbar() {
               rel="noreferrer"
               className="btn-primary mt-2"
             >
-              Book on WhatsApp
+              {t.nav.book}
             </a>
           </div>
         </div>
